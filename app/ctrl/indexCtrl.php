@@ -11,17 +11,16 @@
 
 namespace app\ctrl;
 
-use core\lib\route;
+use app\model\cModel;
+use core\thinknet;
 
-class indexCtrl extends \core\thinknet
+class indexCtrl extends thinknet
 {
     public function index()
     {
-        P('it is index');
-        $model = new \core\lib\model();
-        $sql = 'select * from c';
-        $ret = $model->query($sql);
-        p($ret->fetchAll());
+        $model = new cModel();
+        $ret = $model->delOne(3);
+        dump($ret);
     }
 
     public function demo()
@@ -33,9 +32,8 @@ class indexCtrl extends \core\thinknet
         $this->display('index/index.html');
     }
 
-    public function test(){
-        $temp1 = \core\lib\conf::get('CTRL','route');
-        $temp2 = \core\lib\conf::get('ACTION','route');
+    public function test()
+    {
         $title = '视图文件';
         $data = 'hello world';
         $this->assign('title', $title);

@@ -13,7 +13,14 @@
  * 数据库连接信息配置
  */
 return array(
-    'DSN' => 'mysql:host=127.0.0.1;dbname=test',
-    'USERNAME' => 'root',
-    'PASSWD' => '',
+//    'DSN' => 'mysql:host=127.0.0.1;dbname=test',
+//    'USERNAME' => 'root',
+//    'PASSWD' => '',
+
+    'database_type' => 'mysql',
+    'database_name' => 'test',
+    'server' => '127.0.0.1',
+    'username' => 'root',
+    'password' => '',
+    'charset' => 'utf8'
 );

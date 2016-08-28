@@ -17,17 +17,27 @@
  */
 
 echo '<link rel="icon" href="//blog.0x8c.com/css/images/favicon.ico">';
+
 define('TN',realpath('./'));
 define('CORE',TN.'/core');
 define('APP',TN.'/app');
 define('MODULE','app');
-
 define('DEBUG',true);
 
+include "vendor/autoload.php";
+
 if(DEBUG){
-    ini_set('display_error','On');
+
+    $whoops = new \Whoops\Run;
+    $errorTitle = 'TN Framework error!!!';
+    $option = new \Whoops\Handler\PrettyPageHandler();
+    $option->setPageTitle($errorTitle);
+    $whoops->pushHandler($option);
+    $whoops->register();
+
+    ini_set('display_errors','On');
 }else{
-    ini_set('display_error','Off');
+    ini_set('display_errors','Off');
 }
 
 include CORE.'/common/function.php';
