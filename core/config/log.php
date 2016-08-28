@@ -12,6 +12,6 @@
 return array(
     'DRIVE'=>'file',
     'OPTION' => array(
-        'path' => TN.'/log/'
+        'path' => TN.'/cache/log/'
     )
 );

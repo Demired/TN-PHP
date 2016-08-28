@@ -18,9 +18,11 @@ class indexCtrl extends thinknet
 {
     public function index()
     {
-        $model = new cModel();
-        $ret = $model->delOne(3);
-        dump($ret);
+        $title = 'this title';
+        $data = 'hello world!!!';
+        $this->assign('title',$title);
+        $this->assign('data',$data);
+        $this->display('index/index.html');
     }
 
     public function demo()
@@ -38,6 +40,6 @@ class indexCtrl extends thinknet
         $data = 'hello world';
         $this->assign('title', $title);
         $this->assign('data', $data);
-        $this->display('index/index.html');
+        $this->display('index/test.html');
     }
 }
