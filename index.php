@@ -16,6 +16,7 @@
  * 3.启动框架
  */
 
+echo '<link rel="icon" href="//blog.0x8c.com/css/images/favicon.ico">';
 define('TN',realpath('./'));
 define('CORE',TN.'/core');
 define('APP',TN.'/app');

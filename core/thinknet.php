@@ -23,15 +23,20 @@ class thinknet
      */
     public static function run()
     {
-        $route = new \core\lib\route();
+        lib\log::init();
+        lib\log::log('test');
+        $route = new lib\route();
         $ctrlClass = $route->ctrl;
         $action = $route->action;
         $ctrlFile = APP . '/ctrl/' . $ctrlClass . 'Ctrl.php';
-        $ctrlClass = '\\' . MODULE . '\ctrl\\' . $ctrlClass . 'Ctrl';
+        $ctrlClassPath = '\\' . MODULE . '\ctrl\\' . $ctrlClass . 'Ctrl';
         if (is_file($ctrlFile)) {
             include "$ctrlFile";
-            $ctrl = new $ctrlClass();
+            $ctrl = new $ctrlClassPath();
             $ctrl->$action();
+            lib\log::log('ctrl:'.$ctrlClass.'    '.'action:'.$action);
+        }else{
+            throw new \Exception('找不到控制器'.$ctrlClass);
         }
     }
 
