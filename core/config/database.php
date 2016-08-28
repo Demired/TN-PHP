@@ -9,14 +9,11 @@
 // | Author： 0x8c <zhangyuan@thinknet.cc>
 // +----------------------------------------------------------------
 
+/**
+ * 数据库连接信息配置
+ */
 return array(
-
-//    $dsn = 'mysql:host=127.0.0.1;dbname=test';
-//$username = 'root';
-//$password = '';
     'DSN' => 'mysql:host=127.0.0.1;dbname=test',
     'USERNAME' => 'root',
-    'PASSWORD' => '',
-    
-
+    'PASSWD' => '',
 );
