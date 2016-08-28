@@ -4,24 +4,12 @@
 // +----------------------------------------------------------------
 // | Copyright (c) 2015-2016 http://thinknet.cc All right reserved
 // +----------------------------------------------------------------
-// | Time : 2016/8/26 0:25
+// | Time : 2016/8/28 16:24
 // +----------------------------------------------------------------
 // | Author： 0x8c <zhangyuan@thinknet.cc>
 // +----------------------------------------------------------------
-namespace core\lib;
 
-use core\lib\conf;
-class model extends \PDO{
-
-    public function __construct()
-    {
-
-        $database = conf::all('database');
-        p($database);
-        try{
-            parent::__construct($database['DSN'],$database['USERNAME'],$database['PASSWORD']);
-        }catch (\PDOException $e){
-            p($e->getMessage());
-        }
-    }
-}
+return array(
+    'CTRL' => 'index',
+    'ACTION' => 'index',
+);

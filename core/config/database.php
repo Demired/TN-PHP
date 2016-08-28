@@ -4,24 +4,19 @@
 // +----------------------------------------------------------------
 // | Copyright (c) 2015-2016 http://thinknet.cc All right reserved
 // +----------------------------------------------------------------
-// | Time : 2016/8/26 0:25
+// | Time : 2016/8/28 17:05
 // +----------------------------------------------------------------
 // | Author： 0x8c <zhangyuan@thinknet.cc>
 // +----------------------------------------------------------------
-namespace core\lib;
 
-use core\lib\conf;
-class model extends \PDO{
+return array(
 
-    public function __construct()
-    {
+//    $dsn = 'mysql:host=127.0.0.1;dbname=test';
+//$username = 'root';
+//$password = '';
+    'DSN' => 'mysql:host=127.0.0.1;dbname=test',
+    'USERNAME' => 'root',
+    'PASSWORD' => '',
+    
 
-        $database = conf::all('database');
-        p($database);
-        try{
-            parent::__construct($database['DSN'],$database['USERNAME'],$database['PASSWORD']);
-        }catch (\PDOException $e){
-            p($e->getMessage());
-        }
-    }
-}
+);

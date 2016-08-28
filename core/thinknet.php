@@ -16,6 +16,7 @@ class thinknet
 {
 
     public static $classMap = array();
+    public $assign;
 
     /**
      * 启动方法
@@ -25,9 +26,9 @@ class thinknet
         $route = new \core\lib\route();
         $ctrlClass = $route->ctrl;
         $action = $route->action;
-        $ctrlFile = APP.'/ctrl/'.$ctrlClass.'Ctrl.php';
-        $ctrlClass = '\\'.MODULE.'\ctrl\\'.$ctrlClass.'Ctrl';
-        if(is_file($ctrlFile)){
+        $ctrlFile = APP . '/ctrl/' . $ctrlClass . 'Ctrl.php';
+        $ctrlClass = '\\' . MODULE . '\ctrl\\' . $ctrlClass . 'Ctrl';
+        if (is_file($ctrlFile)) {
             include "$ctrlFile";
             $ctrl = new $ctrlClass();
             $ctrl->$action();
@@ -41,19 +42,45 @@ class thinknet
      */
     static public function load($class)
     {
-        if(isset($classMap[$class])){
+        if (isset($classMap[$class])) {
             return true;
-        }else{
-            $class = str_replace('\\','/',$class);
-            $file = TN.'/'.$class.'.php';
-            if(is_file($file)){
+        } else {
+            $class = str_replace('\\', '/', $class);
+            $file = TN . '/' . $class . '.php';
+            if (is_file($file)) {
                 include "$file";
                 self::$classMap[$class] = $class;
-            }else{
+            } else {
                 return false;
             }
         }
-
     }
 
+    /**
+     * 模板赋值
+     * @param $name
+     * @param $value
+     */
+    public function assign($name, $value)
+    {
+        $this->assign[$name] = $value;
+    }
+
+    /**
+     * 显示模板
+     * @param $file
+     * @throws \Exception
+     */
+    public function display($file)
+    {
+       $file = APP.'/views/'.$file;
+
+        if(is_file($file)){
+//            $this->assign;
+            extract($this->assign);
+            include "$file";
+        }else{
+            throw new \Exception('模板文件'.$file.'不存在');
+        }
+    }
 }
