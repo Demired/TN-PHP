@@ -24,7 +24,6 @@ class thinknet
     public static function run()
     {
         lib\log::init();
-        lib\log::log('test');
         $route = new lib\route();
         $ctrlClass = $route->ctrl;
         $action = $route->action;
@@ -34,9 +33,9 @@ class thinknet
             include "$ctrlFile";
             $ctrl = new $ctrlClassPath();
             $ctrl->$action();
-            lib\log::log('ctrl:'.$ctrlClass.'    '.'action:'.$action);
-        }else{
-            throw new \Exception('找不到控制器'.$ctrlClass);
+            lib\log::log('ctrl:' . $ctrlClass . '    ' . 'action:' . $action);
+        } else {
+            throw new \Exception('找不到控制器' . $ctrlClass);
         }
     }
 
@@ -75,17 +74,24 @@ class thinknet
      * 显示模板
      * @param $file
      * @throws \Exception
+     * TODO: 不传参的时候自动加载默认模板
      */
     public function display($file)
     {
-       $file = APP.'/views/'.$file;
+        $filePath = APP . '/views/' . $file;
 
-        if(is_file($file)){
-//            $this->assign;
-            extract($this->assign);
-            include "$file";
-        }else{
-            throw new \Exception('模板文件'.$file.'不存在');
+        if (is_file($filePath)) {
+            \Twig_Autoloader::register();
+            $loader = new \Twig_Loader_Filesystem(APP . '/views');
+            $twig = new \Twig_Environment($loader, array(
+                'cache' => TN.'/cache/twig',
+//                'cache' => false,
+                'debug' => DEBUG
+            ));
+            $template = $twig->loadTemplate($file);
+            $template->display($this->assign ? $this->assign : '');
+        } else {
+            throw new \Exception('模板文件' . $file . '不存在');
         }
     }
 }
